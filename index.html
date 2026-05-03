@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nişanyan Houses Hotel — Menü</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:      #8b1a1a;
+    --cream:    #f5f0e2;
+    --parchment:#ede5cc;
+    --dark:     #2a1a0e;
+    --gray:     #666;
+    --lightgray:#999;
+    --border:   #c8b89a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a1a;
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: var(--red);
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    flex: none;
+    padding: 14px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .tab-btn.active { color:#fff; border-bottom-color:var(--parchment); }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .page {
+    background: var(--cream);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .page-header-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .page-header-text h2 span {
+    display: block;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: var(--dark);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .snail-logo { text-align: center; }
+  .snail-logo svg { width: 60px; height: 60px; }
+  .hotel-name {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.52rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    text-align: center;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .hotel-name strong { font-weight: 900; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24px;
+  }
+  @media (max-width: 540px) { .two-col { grid-template-columns: 1fr; } }
+
+  .cat { margin-bottom: 24px; }
+
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .cat-title span {
+    display: inline;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--dark);
+    text-transform: uppercase;
+    font-style: normal;
+  }
+  .cat-rule { height:1.5px; background:var(--red); margin:6px 0 9px; }
+
+  .item { margin-bottom: 9px; }
+  .item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .item-name {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--dark);
+    flex: 1;
+    line-height: 1.3;
+  }
+  .item-price {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--dark);
+    white-space: nowrap;
+  }
+  .item-desc {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.67rem;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 1.35;
+    margin-top: 1px;
+    font-style: italic;
+  }
+  .item-cal {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.6rem;
+    color: var(--lightgray);
+    margin-top: 1px;
+  }
+
+  .vg {
+    display: inline-block;
+    width: 13px; height: 13px;
+    border: 1.5px solid var(--red);
+    border-radius: 50%;
+    color: var(--red);
+    font-size: 7px;
+    line-height: 10px;
+    text-align: center;
+    font-weight: 700;
+    margin-right: 2px;
+    vertical-align: middle;
+    position: relative; top:-1px;
+  }
+
+  .snail-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    margin-top: 24px;
+  }
+  .snail-row svg { width: 26px; height: 26px; }
+
+  .foot-note {
+    text-align: center;
+    font-size: 0.6rem;
+    color: var(--gray);
+    letter-spacing: 0.07em;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    line-height: 1.6;
+  }
+
+  .divider { height:1px; background:var(--border); margin:16px 0; }
+</style>
+</head>
+<body>
+
+<svg style="display:none">
+  <symbol id="snail" viewBox="0 0 100 80">
+    <!-- Shell -->
+    <ellipse cx="62" cy="38" rx="26" ry="24" fill="none" stroke="#8b1a1a" stroke-width="3.5"/>
+    <ellipse cx="62" cy="38" rx="17" ry="15" fill="none" stroke="#8b1a1a" stroke-width="2.8"/>
+    <ellipse cx="62" cy="38" rx="9"  ry="8"  fill="none" stroke="#8b1a1a" stroke-width="2.2"/>
+    <ellipse cx="62" cy="38" rx="3"  ry="3"  fill="#8b1a1a"/>
+    <!-- Body -->
+    <path d="M36 56 Q20 60 14 52 Q8 44 18 42 Q26 40 34 48 Q40 56 62 58 Q74 59 82 52" fill="none" stroke="#8b1a1a" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Head -->
+    <ellipse cx="15" cy="46" rx="9" ry="7" fill="#8b1a1a"/>
+    <!-- Antennae -->
+    <line x1="12" y1="40" x2="7"  y2="30" stroke="#8b1a1a" stroke-width="2" stroke-linecap="round"/>
+    <line x1="18" y1="39" x2="15" y2="28" stroke="#8b1a1a" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="7"  cy="29" r="2.5" fill="#8b1a1a"/>
+    <circle cx="15" cy="27" r="2.5" fill="#8b1a1a"/>
+  </symbol>
+</svg>
+
+<nav id="tabs">
+  <button class="tab-btn active" onclick="showTab('yemek',this)">Yemek / Food</button>
+  <button class="tab-btn" onclick="showTab('icecek',this)">İçecek / Drinks</button>
+  <button class="tab-btn" onclick="showTab('sarap',this)">Şarap / Wine</button>
+  <button class="tab-btn" onclick="showTab('bira',this)">Bira &amp; Rakı</button>
+</nav>
+
+<!-- ══ YEMEK ══ -->
+<div id="tab-yemek" class="tab-content active">
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-text"><h2>Menü<span>/ Food Menu</span></h2></div>
+    <div class="snail-logo">
+      <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+      <div class="hotel-name">Nişanyan <strong>Houses</strong> Hotel</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+  <div>
+    <div class="cat">
+      <div class="cat-title">Başlangıçlar <span>/ Starters</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Nefis Çorba</span><span class="item-price">300 TL</span></div><div class="item-desc">Very good soup</div><div class="item-cal">~120 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Çiğ Balık – Somon, Zencefilli</span><span class="item-price">850 TL</span></div><div class="item-desc">Fish carpaccio with fresh ginger, for two</div><div class="item-cal">~180 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Sıcak Soğuk Salata – Cevizli, Kuru Meyveli</span><span class="item-price">550 TL</span></div><div class="item-desc">Warm-cold salad, dried fruits &amp; walnut</div><div class="item-cal">~210 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Aşçının Salatası</span><span class="item-price">400 TL</span></div><div class="item-desc">Chef's salad</div><div class="item-cal">~190 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Topik – Ermeni Merasim Yemeği</span><span class="item-price">750 TL</span></div><div class="item-desc">Armenian chickpea specialty</div><div class="item-cal">~280 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Günün Mezeleri (her meze)</span><span class="item-price">250 TL</span></div><div class="item-desc">Aegean delights, cold meze of seasonal vegetables</div><div class="item-cal">~90 kcal / meze</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Karışık Meze Tabağı</span><span class="item-price">850 TL</span></div><div class="item-desc">Mixed Starter Plate, fresh from the kitchen</div><div class="item-cal">~420 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Patates Kızartması, Geleneksel Ev Usulü</span><span class="item-price">350 TL</span></div><div class="item-desc">French Fries</div><div class="item-cal">~370 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Pastırmalı Paçanga Böreği</span><span class="item-price">550 TL</span></div><div class="item-desc">Pastrami Pastry</div><div class="item-cal">~340 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Lüks Peynir Tabağı</span><span class="item-price">1.550 TL</span></div><div class="item-desc">Gourmet cheese plate</div><div class="item-cal">~480 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Buharda Özbek Mantı, Kıymalı</span><span class="item-price">800 TL</span></div><div class="item-desc">Uzbek steamed dumplings with minced meat</div><div class="item-cal">~430 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Buharda Özbek Mantı, Sebzeli</span><span class="item-price">700 TL</span></div><div class="item-desc">Uzbek steamed dumplings with seasonal vegetables</div><div class="item-cal">~330 kcal</div></div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-title">ET / Kırmızı Et <span>/ Red Meat</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Osso Buco / Fırında Dana İncik</span><span class="item-price">2.100 TL</span></div><div class="item-desc">Delicious veal shank</div><div class="item-cal">~620 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Bonfile, Özel Sosuyla (220–250 gr)</span><span class="item-price">1.450 TL</span></div><div class="item-desc">Fillet steak with the Chef's special sauce</div><div class="item-cal">~540 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Şaşlık</span><span class="item-price">1.200 TL</span></div><div class="item-desc">Marinated sirloin steak on skewers</div><div class="item-cal">~490 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Köy Usulü Dana Keşkek</span><span class="item-price">750 TL</span></div><div class="item-desc">Şirince style wheat porridge with beef</div><div class="item-cal">~520 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Izgara Köfte – Bol İlaveli</span><span class="item-price">800 TL</span></div><div class="item-desc">Grilled meatballs with side dishes</div><div class="item-cal">~580 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Yaprak Ciğer</span><span class="item-price">800 TL</span></div><div class="item-desc">Turkish style liver</div><div class="item-cal">~380 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Taş Fırında Sebzeli Etli Güveç</span><span class="item-price">1.000 TL</span></div><div class="item-desc">Clay pot stew, beef and vegetable, village style</div><div class="item-cal">~560 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Sadece Sebze Güveç</span><span class="item-price">650 TL</span></div><div class="item-desc">Vegetarian clay pot stew</div><div class="item-cal">~290 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Sacta Et Sote</span><span class="item-price">900 TL</span></div><div class="item-desc">Domatesli, Soğanlı, Sarımsaklı · Sautéed veal, Mediterranean twist</div><div class="item-cal">~500 kcal</div></div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-title">Makarna <span>/ Pasta</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Şirince Makarnası, Sebzeli ve Zeytinli</span><span class="item-price">650 TL</span></div><div class="item-desc">Pasta with tomato, olives, vegetables &amp; herbs</div><div class="item-cal">~480 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Pesto Soslu Peynirli</span><span class="item-price">750 TL</span></div><div class="item-desc">Pesto sauce &amp; creamy cheeses (basil from our garden)</div><div class="item-cal">~560 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Spagetti, Domates Soslu</span><span class="item-price">450 TL</span></div><div class="item-desc">Spaghetti with tomato sauce</div><div class="item-cal">~410 kcal</div></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="cat">
+      <div class="cat-title">Tavuk <span>/ Chicken</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Tavuk, Zerdeçal ve Soya Soslu</span><span class="item-price">850 TL</span></div><div class="item-desc">Chicken marinated in spicy soy sauce</div><div class="item-cal">~420 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Tavuk Şiş, Marine Edilmiş Kalça Eti</span><span class="item-price">800 TL</span></div><div class="item-desc">Marinated chicken thighs on skewers</div><div class="item-cal">~450 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Piliç Şnitsel</span><span class="item-price">650 TL</span></div><div class="item-desc">Chicken Schnitzel</div><div class="item-cal">~510 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Piliç Nugget</span><span class="item-price">650 TL</span></div><div class="item-desc">Chicken nuggets</div><div class="item-cal">~490 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Taş Fırında Sebzeli Tavuklu Güveç</span><span class="item-price">800 TL</span></div><div class="item-desc">Chicken clay pot stew, mommy style</div><div class="item-cal">~440 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Sacta Tavuk Sote</span><span class="item-price">750 TL</span></div><div class="item-desc">Domatesli, Soğanlı, Sarımsaklı · Sautéed chicken, Mediterranean twist</div><div class="item-cal">~390 kcal</div></div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-title">Denizden Çıkanlar <span>/ Fish &amp; Sea Food</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Kağıtta Levrek / Çipura</span><span class="item-price">1.350 TL</span></div><div class="item-desc">Sea Bass / Bream in a paper bag, with zesty vegetable slices</div><div class="item-cal">~310 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Tavada Balık (400 gr)</span><span class="item-price">1.150 TL</span></div><div class="item-desc">Whole Fish</div><div class="item-cal">~360 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Levrek / Çipura Izgara (1000 gr) 2 kişilik</span><span class="item-price">2.100 TL</span></div><div class="item-desc">Seabass / Bream, grilled for 2</div><div class="item-cal">~620 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Kabuklu Siyah Midye, Kremalı</span><span class="item-price">1.050 TL</span></div><div class="item-desc">Mussels with garlic, heavy cream, white wine</div><div class="item-cal">~380 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Karides Güveç, Sarımsaklı Domatesli</span><span class="item-price">1.000 TL</span></div><div class="item-desc">Shrimps in a clay pot, garlic and tomato</div><div class="item-cal">~340 kcal</div></div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-title">Tatlılar <span>/ Desserts</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Çikolatalı Sufle</span><span class="item-price">550 TL</span></div><div class="item-desc">Soufflé au chocolat, heavenly</div><div class="item-cal">~480 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Keçiboynuzlu Parfe</span><span class="item-price">500 TL</span></div><div class="item-desc">Carob and rum ice cream</div><div class="item-cal">~390 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">İrmik Helvası – Dondurmalı</span><span class="item-price">300 TL</span></div><div class="item-desc">Semolina pastry with orange zest, served with ice-cream</div><div class="item-cal">~410 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Günün Tatlısı</span><span class="item-price">350 TL</span></div><div class="item-desc">Dessert of the day</div><div class="item-cal">~320 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Sade Dondurma</span><span class="item-price">250 TL</span></div><div class="item-desc">Vanilla ice cream</div><div class="item-cal">~270 kcal</div></div>
+      <div class="item"><div class="item-row"><span class="item-name"><span class="vg">V</span>Meyve Tabağı</span><span class="item-price">450 TL</span></div><div class="item-desc">Fruit plate</div><div class="item-cal">~130 kcal</div></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="snail-row">
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+  </div>
+  <div class="foot-note"><span class="vg">V</span> Vejeteryan &nbsp;·&nbsp; Fiyatlara KDV ve Konaklama Vergisi dahildir.<br>Kalori değerleri tahminidir. Allerjenler için lütfen servis ekibimizle iletişime geçiniz.</div>
+</div>
+</div>
+
+<!-- ══ İÇECEK ══ -->
+<div id="tab-icecek" class="tab-content">
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-text"><h2>İçecek<span>/ Drinks Menu</span></h2></div>
+    <div class="snail-logo">
+      <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+      <div class="hotel-name">Nişanyan <strong>Houses</strong> Hotel</div>
+    </div>
+  </div>
+
+  <div class="cat">
+    <div class="cat-title">Alkolsüz İçecekler <span>/ Soft Drinks</span></div>
+    <div class="cat-rule"></div>
+    <div class="item"><div class="item-row"><span class="item-name">Meşrubat</span><span class="item-price">150 TL</span></div><div class="item-desc">Soft drink (Cola, Fanta, Sprite…)</div><div class="item-cal">~140 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Şalgam</span><span class="item-price">120 TL</span></div><div class="item-desc">Fermented turnip juice</div><div class="item-cal">~30 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Ayran</span><span class="item-price">180 TL</span></div><div class="item-desc">Yoghurt drink</div><div class="item-cal">~70 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Soda</span><span class="item-price">60 TL</span></div><div class="item-desc">Sparkling water</div><div class="item-cal">~0 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Su (0.5 lt)</span><span class="item-price">50 TL</span></div><div class="item-desc">Still water</div><div class="item-cal">0 kcal</div></div>
+  </div>
+
+  <div class="cat">
+    <div class="cat-title">Sıcak İçecekler <span>/ Hot Drinks</span></div>
+    <div class="cat-rule"></div>
+    <div class="item"><div class="item-row"><span class="item-name">Türk Kahvesi</span><span class="item-price">150 TL</span></div><div class="item-desc">Turkish coffee</div><div class="item-cal">~5 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Filtre Kahve</span><span class="item-price">170 TL</span></div><div class="item-desc">Filter coffee</div><div class="item-cal">~5 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Latte</span><span class="item-price">180 TL</span></div><div class="item-desc">Espresso with steamed milk</div><div class="item-cal">~120 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Çay</span><span class="item-price">40 TL</span></div><div class="item-desc">Turkish tea</div><div class="item-cal">~2 kcal</div></div>
+  </div>
+
+  <div class="snail-row">
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+  </div>
+  <div class="foot-note">Fiyatlara KDV ve Konaklama Vergisi dahildir. · Kalori değerleri tahminidir.</div>
+</div>
+</div>
+
+<!-- ══ ŞARAP ══ -->
+<div id="tab-sarap" class="tab-content">
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-text"><h2>Şarap Menüsü<span>/ Wine Menu</span></h2></div>
+    <div class="snail-logo">
+      <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+      <div class="hotel-name">Nişanyan <strong>Houses</strong> Hotel</div>
+    </div>
+  </div>
+
+  <div class="item" style="margin-bottom:16px;">
+    <div class="item-row"><span class="item-name">Kadeh Şarap &nbsp;(Kırmızı / Beyaz / Rosé)</span><span class="item-price">450 TL</span></div>
+    <div class="item-desc">A Glass of Wine — Red / White / Rosé</div>
+  </div>
+  <div class="divider"></div>
+
+  <div class="two-col">
+  <div>
+    <div class="cat">
+      <div class="cat-title">7 Bilgeler <span>(Yöresel / Local)</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Anaxagoras</span><span class="item-price">2.900 TL</span></div><div class="item-desc">Chardonnay – Beyaz / White</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Khilon</span><span class="item-price">3.000 TL</span></div><div class="item-desc">Sauvignon Blanc – Beyaz / White</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Hippokrates</span><span class="item-price">2.900 TL</span></div><div class="item-desc">Cabernet Franc – Kırmızı / Red</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Pythagoras</span><span class="item-price">3.600 TL</span></div><div class="item-desc">Cabernet Sauvignon – Kırmızı / Red</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Lasos Rose</span><span class="item-price">2.400 TL</span></div><div class="item-desc">Rosé</div></div>
+    </div>
+    <div class="cat">
+      <div class="cat-title">Barudi <span>(Aydın / Inner Aegean)</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Shiraz, Merlot</span><span class="item-price">1.900 TL</span></div><div class="item-desc">Kırmızı / Red</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Chardonnay</span><span class="item-price">1.900 TL</span></div><div class="item-desc">Beyaz / White</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Rose</span><span class="item-price">1.900 TL</span></div><div class="item-desc">Rosé</div></div>
+    </div>
+    <div class="cat">
+      <div class="cat-title">Urla <span>(Aegean Coast)</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Urla</span><span class="item-price">2.500 TL</span></div><div class="item-desc">Chardonnay – Beyaz / White</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Urla Vourla</span><span class="item-price">2.900 TL</span></div><div class="item-desc">Merlot, Shiraz, Cab. Sauvignon – Kırmızı / Red</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Urla Nero d'Avola – Urla Karası</span><span class="item-price">3.600 TL</span></div><div class="item-desc">Kırmızı / Red</div></div>
+    </div>
+  </div>
+  <div>
+    <div class="cat">
+      <div class="cat-title">Midin <span>(Mardin / South Eastern Turkey)</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">Cehennem Deresi / Hells Creek 2024</span><span class="item-price">2.750 TL</span></div><div class="item-desc">Bib-zek, Mazrona – Beyaz / White</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Cehennem Deresi / Hells Creek 2023/2024</span><span class="item-price">2.750 TL</span></div><div class="item-desc">Gaydoni, Kittlnats, Boğazkere – Kırmızı / Red</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Cudi / 2022</span><span class="item-price">3.000 TL</span></div><div class="item-desc">Boğazkere, Okuzgözü, Gaydoni – Kırmızı / Red</div></div>
+    </div>
+    <div class="cat">
+      <div class="cat-title">Sevilen <span>(İzmir)</span></div>
+      <div class="cat-rule"></div>
+      <div class="item"><div class="item-row"><span class="item-name">İsabey</span><span class="item-price">3.000 TL</span></div><div class="item-desc">Sauvignon Blanc – Beyaz / White</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">İsabey</span><span class="item-price">2.900 TL</span></div><div class="item-desc">Chardonnay – Beyaz / White</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Majestik Blush</span><span class="item-price">2.050 TL</span></div><div class="item-desc">Rosé</div></div>
+      <div class="item"><div class="item-row"><span class="item-name">Majestik White</span><span class="item-price">2.050 TL</span></div><div class="item-desc">Beyaz / White</div></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="snail-row">
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+  </div>
+  <div class="foot-note">Fiyatlara KDV ve Konaklama Vergisi dahildir.</div>
+</div>
+</div>
+
+<!-- ══ BİRA & RAKI ══ -->
+<div id="tab-bira" class="tab-content">
+<div class="page">
+  <div class="page-header">
+    <div class="page-header-text"><h2>Bira &amp; Rakı<span>/ Beer &amp; Rakı</span></h2></div>
+    <div class="snail-logo">
+      <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+      <div class="hotel-name">Nişanyan <strong>Houses</strong> Hotel</div>
+    </div>
+  </div>
+
+  <div class="cat">
+    <div class="cat-title">Bira <span>/ Beer</span></div>
+    <div class="cat-rule"></div>
+    <div class="item"><div class="item-row"><span class="item-name">Bira (50 cl)</span><span class="item-price">350 TL</span></div><div class="item-desc">Beer</div><div class="item-cal">~215 kcal</div></div>
+  </div>
+
+  <div class="cat">
+    <div class="cat-title">Rakı</div>
+    <div class="cat-rule"></div>
+    <div class="item"><div class="item-row"><span class="item-name">Rakı Tek (4 cl)</span><span class="item-price">450 TL</span></div><div class="item-cal">~90 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Rakı Duble (8 cl)</span><span class="item-price">750 TL</span></div><div class="item-cal">~180 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Rakı (35 cl)</span><span class="item-price">1.900 TL</span></div><div class="item-cal">~780 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Rakı (50 cl)</span><span class="item-price">2.250 TL</span></div><div class="item-cal">~1.110 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Rakı (70 cl)</span><span class="item-price">2.900 TL</span></div><div class="item-cal">~1.560 kcal</div></div>
+    <div class="item"><div class="item-row"><span class="item-name">Rakı (100 cl)</span><span class="item-price">3.450 TL</span></div><div class="item-cal">~2.220 kcal</div></div>
+  </div>
+
+  <div class="snail-row">
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+    <svg viewBox="0 0 100 80"><use href="#snail"/></svg>
+  </div>
+  <div class="foot-note">Fiyatlara KDV ve Konaklama Vergisi dahildir. · Kalori değerleri tahminidir.</div>
+</div>
+</div>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
